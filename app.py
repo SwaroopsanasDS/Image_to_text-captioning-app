@@ -29,7 +29,7 @@ st.markdown("""
     h1, h2, h3 {
         color: #0A84FF; /* Professional attractive blue */
         font-weight: 600;
-        animation: fadeIn 1s ease-in-out;
+        animation: fadeIn 1.5s ease-in-out;
     }
     h2 {
         animation: fadeIn 2s ease-in-out;
@@ -122,7 +122,7 @@ uploaded_file = st.file_uploader("📁 Upload Image", type=["jpg", "jpeg", "png"
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption='🖼️ Uploaded Image', use_column_width=True, width=500, output_format="JPEG", channels="RGB", clamp=True)
+    st.image(image, caption='🖼️ Uploaded Image', use_column_width=True, width=400, output_format="JPEG", channels="RGB", clamp=True, class_="uploadedImage")
     st.markdown("<p style='text-align: center;'>💫 Image Uploaded!</p>", unsafe_allow_html=True)
 
     # BUTTON FOR CAPTION GENERATION
