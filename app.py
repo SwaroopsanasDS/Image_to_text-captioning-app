@@ -113,7 +113,7 @@ def generate_caption(image):
     return generated_caption
 
 # --------- MAIN UI ----------
-st.markdown("<h1 align='center'>🚀 Futuristic Image Captioning</h1>", unsafe_allow_html=True)
+st.markdown("<h1 align='center'>Image Captioning</h1>", unsafe_allow_html=True)
 st.markdown("<h3 align='center' class='fade-in-text'>Upload your image and let AI describe it intelligently</h3>", unsafe_allow_html=True)
 st.markdown("---")
 
@@ -122,7 +122,7 @@ uploaded_file = st.file_uploader("📁 Upload Image", type=["jpg", "jpeg", "png"
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption='🖼️ Uploaded Image', use_column_width=True, width=400, output_format="JPEG", channels="RGB", clamp=True, class_="uploadedImage")
+    st.image(image, caption='🖼️ Uploaded Image', use_column_width=True, width=400, output_format="JPEG", channels="RGB", clamp=True)
     st.markdown("<p style='text-align: center;'>💫 Image Uploaded!</p>", unsafe_allow_html=True)
 
     # BUTTON FOR CAPTION GENERATION
