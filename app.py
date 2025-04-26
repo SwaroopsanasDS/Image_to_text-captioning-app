@@ -107,7 +107,7 @@ def generate_caption(image):
     return generated_caption
 
 # --------- MAIN UI ----------
-st.markdown("<h1 align='center'>🚀 Futuristic Image Captioning</h1>", unsafe_allow_html=True)
+st.markdown("<h1 align='center'>Image Captioning</h1>", unsafe_allow_html=True)
 st.markdown("<h3 align='center' class='fade-in-text'>Upload your image and let AI describe it intelligently</h3>", unsafe_allow_html=True)
 st.markdown("---")
 
