@@ -54,12 +54,6 @@ st.markdown("""
         background-color: #fff;
         border: 1px solid #0A84FF;
     }
-    .uploadedImage {
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-        animation: bounceIn 0.6s ease-in-out;
-    }
     /* Fade-in Animation */
     @keyframes fadeIn {
         from { opacity: 0; }
@@ -113,7 +107,7 @@ def generate_caption(image):
     return generated_caption
 
 # --------- MAIN UI ----------
-st.markdown("<h1 align='center'>Image Captioning</h1>", unsafe_allow_html=True)
+st.markdown("<h1 align='center'>🚀 Futuristic Image Captioning</h1>", unsafe_allow_html=True)
 st.markdown("<h3 align='center' class='fade-in-text'>Upload your image and let AI describe it intelligently</h3>", unsafe_allow_html=True)
 st.markdown("---")
 
@@ -122,7 +116,7 @@ uploaded_file = st.file_uploader("📁 Upload Image", type=["jpg", "jpeg", "png"
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption='🖼️ Uploaded Image', use_column_width=True, width=400, output_format="JPEG", channels="RGB", clamp=True)
+    st.image(image, caption='🖼️ Uploaded Image', use_container_width=True, width=400, output_format="JPEG", channels="RGB", clamp=True)
     st.markdown("<p style='text-align: center;'>💫 Image Uploaded!</p>", unsafe_allow_html=True)
 
     # BUTTON FOR CAPTION GENERATION
