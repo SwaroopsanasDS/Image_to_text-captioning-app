@@ -1,58 +1,57 @@
-# ---------- IMPORTS ----------
+# -------- IMPORTS ----------
 import streamlit as st
 from transformers import AutoProcessor, AutoModelForCausalLM
 import torch
 from PIL import Image
 import time
 
-# ---------- CONFIGURATION ----------
+# -------- CONFIGURE PAGE ----------
 st.set_page_config(
-    page_title="🚀 Futuristic Image Captioner | GIT-Base",
+    page_title="Futuristic Image Caption Generator",
     page_icon="🖼️",
-    layout="wide",  # full width
-    initial_sidebar_state="collapsed"  # hide sidebar for clean look
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
-# ---------- CUSTOM CSS FOR FUTURISTIC VIBES ----------
+# -------- CUSTOM FUTURISTIC + CLASSY STYLE ----------
 st.markdown("""
     <style>
-    body {
-        background-color: #0f0f1a;
-        color: #f8f8f2;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+    html, body, [class*="css"]  {
+        font-family: 'Poppins', sans-serif;
+        background-color: #121212;
+        color: #E0E0E0;
     }
     .stApp {
-        background-image: linear-gradient(135deg, #0f0f1a, #1a1a2e, #16213e, #0f3460);
-        background-size: 400% 400%;
-        animation: gradientMove 15s ease infinite;
+        background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
     }
-    @keyframes gradientMove {
-        0%{background-position:0% 50%}
-        50%{background-position:100% 50%}
-        100%{background-position:0% 50%}
-    }
-    h1, h2, h3 {
-        color: #00f9ff;
-        text-shadow: 0 0 10px #00f9ff;
-        font-family: 'Orbitron', sans-serif;
+    h1, h2, h3, h4 {
+        color: #00FFFF;
+        font-weight: 600;
     }
     .stButton>button {
-        background-color: #7209b7;
-        color: white;
-        border-radius: 10px;
-        height: 3em;
-        width: 12em;
-        font-size: 18px;
-        font-weight: bold;
-        box-shadow: 0 0 10px #7209b7;
+        background-color: #00FFFF;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75em 1.5em;
+        font-weight: 600;
+        font-size: 16px;
+        transition: 0.3s;
     }
     .stButton>button:hover {
-        background-color: #3a0ca3;
-        box-shadow: 0 0 20px #3a0ca3;
+        background-color: #00cccc;
+        color: white;
+    }
+    .css-1cpxqw2 { /* upload button color */
+        background-color: #1c1c1c;
+        border: 1px solid #00FFFF;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# ---------- LOAD MODEL ----------
+# --------- LOAD MODEL ----------
 @st.cache_resource
 def load_model():
     processor = AutoProcessor.from_pretrained("microsoft/git-base")
@@ -63,31 +62,31 @@ def load_model():
 
 processor, model, device = load_model()
 
-# ---------- CAPTION FUNCTION ----------
+# --------- CAPTION FUNCTION ----------
 def generate_caption(image):
     inputs = processor(images=image, return_tensors="pt").to(device)
     generated_ids = model.generate(**inputs, max_new_tokens=50)
     generated_caption = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
     return generated_caption
 
-# ---------- APP UI ----------
-st.markdown("<h1 align='center'>🚀 Futuristic Image Captioning App</h1>", unsafe_allow_html=True)
-st.markdown("<h3 align='center'>Upload your image & watch AI describe it like magic! ✨</h3>", unsafe_allow_html=True)
+# --------- UI SECTION ----------
+st.markdown("<h1 align='center'>🚀 AI Powered Image Captioning</h1>", unsafe_allow_html=True)
+st.markdown("<h3 align='center'>Upload an image, and our futuristic model describes it intelligently.</h3>", unsafe_allow_html=True)
+st.markdown("---")
 
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("📁 Upload Image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption='🎯 Uploaded Image', use_column_width=True)
+    st.image(image, caption='🖼️ Uploaded Image', use_column_width=True)
 
-    if st.button("⚡ Generate Caption"):
-        with st.spinner('Processing through hyperspace... 🚀✨'):
-            time.sleep(2)  # Just for better UX
+    if st.button("✨ Generate Caption"):
+        with st.spinner('Analyzing image... Please wait 🚀'):
+            time.sleep(1.5)
             caption = generate_caption(image)
         
-        st.success("✅ Caption Generated!", icon="🔥")
-        st.markdown(f"<h2 style='text-align: center; color: #ff007f;'>{caption}</h2>", unsafe_allow_html=True)
+        st.success("✅ Caption Generated!")
+        st.markdown(f"<h2 style='text-align: center; color: #00FFFF;'>{caption}</h2>", unsafe_allow_html=True)
 
-# ---------- FOOTER ----------
-st.markdown("<hr style='border:1px solid #00f9ff;'>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Made with 💙 by Swaroop ⚡</p>", unsafe_allow_html=True)
+st.markdown("---")
+st.markdown("<p style='text-align: center; font-size: 14px;'>© 2025 | Built with 🚀 by Swaroop</p>", unsafe_allow_html=True)
